@@ -120,7 +120,7 @@ p, li, dd { text-wrap: pretty; }
 }
 
 /* ---------- Kopfzeile ---------- */
-.nav { position: sticky; top: 0; z-index: 40; height: var(--nav-h); background: var(--paper); border-bottom: 1px solid var(--line); view-transition-name: nav; }
+.nav { position: sticky; top: 0; z-index: 40; height: var(--nav-h); background: var(--paper); border-bottom: 1px solid var(--line); }
 .nav__in { height: 100%; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(1rem, 3vw, 3rem); }
 .nav__links { display: flex; justify-content: center; gap: clamp(1.1rem, 2.6vw, 2.6rem); }
 .nav__links a { position: relative; padding-block: 0.5rem; text-decoration: none; font-size: 0.97rem; font-weight: 500; color: var(--ink-2); transition: color 200ms ease; }
@@ -134,9 +134,10 @@ p, li, dd { text-wrap: pretty; }
 .nav::before { content: ""; position: absolute; inset: auto 0 -1px; height: 3px; background: var(--yellow); transform: scaleX(0); transform-origin: left; opacity: 0; pointer-events: none; z-index: 1; }
 .nav.is-intro::before { animation: kopflinie 1400ms 300ms var(--ease-out) both; }
 @keyframes kopflinie { 0% { opacity: 1; transform: scaleX(0); } 70% { opacity: 1; transform: scaleX(1); } 100% { opacity: 0; transform: scaleX(1); } }
+.nav::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 24px; pointer-events: none; background: linear-gradient(rgb(11 27 43 / 0.12), transparent); opacity: 0; }
 @supports (animation-timeline: scroll()) {
-  .nav { box-shadow: 0 10px 24px -18px rgb(11 27 43 / 0); animation: nav-schatten linear both; animation-timeline: scroll(root); animation-range: 0 120px; }
-  @keyframes nav-schatten { to { box-shadow: 0 10px 24px -18px rgb(11 27 43 / 0.55); } }
+  .nav::after { animation: nav-schatten linear both; animation-timeline: scroll(root); animation-range: 0 120px; }
+  @keyframes nav-schatten { to { opacity: 1; } }
 }
 .brand, .nav__links a, .nav__act { animation: nav-in 700ms var(--ease-out) both; }
 .nav__links a:nth-child(1) { animation-delay: 140ms; } .nav__links a:nth-child(2) { animation-delay: 200ms; } .nav__links a:nth-child(3) { animation-delay: 260ms; }
@@ -220,9 +221,9 @@ p, li, dd { text-wrap: pretty; }
 
 /* Leistungen: Foto bleibt links stehen und wechselt, rechts laufen die fünf Leistungen vorbei */
 .lei { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(2rem, 6vw, 7rem); align-items: start; }
-.lei__fig { position: sticky; top: calc(var(--nav-h) + 2rem); aspect-ratio: 4 / 3; border-radius: var(--r); overflow: hidden; background: var(--tint); }
-.lei__fig img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.05); transition: opacity 500ms var(--ease-out), transform 900ms var(--ease-out); }
-.lei__fig img.is-on { opacity: 1; transform: none; }
+.lei__fig { contain: paint; position: sticky; top: calc(var(--nav-h) + 2rem); aspect-ratio: 4 / 3; border-radius: var(--r); overflow: hidden; background: var(--tint); }
+.lei__fig img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 450ms var(--ease-out); }
+.lei__fig img.is-on { opacity: 1; }
 .lei__fig::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 5px; background: var(--yellow); }
 .lei__list { list-style: none; padding: 0; counter-reset: none; }
 .lei__list li { min-height: clamp(16rem, 42vh, 26rem); display: flex; flex-direction: column; justify-content: center; gap: 0.9rem; border-top: 1px solid var(--line); padding-block: 2rem; color: var(--ink-3); transition: color 400ms ease; }
@@ -243,12 +244,11 @@ p, li, dd { text-wrap: pretty; }
 .ref { background: var(--tint); max-width: none; padding-inline: var(--edge); width: auto; }
 .ref__grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: stretch; }
 .ref__stage { position: relative; height: clamp(22rem, 38vw, 34rem); border-radius: var(--r); overflow: hidden; background: var(--surface); }
-.slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; opacity: 0; visibility: hidden; filter: blur(3px); transition: opacity 520ms var(--ease-out), filter 520ms var(--ease-out), visibility 0s 520ms; }
-.slide.is-on { opacity: 1; visibility: visible; filter: none; transition-delay: 0s; }
+.slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; opacity: 0; visibility: hidden; transition: opacity 520ms var(--ease-out), visibility 0s 520ms; }
+.slide.is-on { opacity: 1; visibility: visible; transition-delay: 0s; }
 .slide[data-c="21"] { grid-template-columns: 2fr 1fr; }
 .slide[data-c="12"] { grid-template-columns: 1fr 2fr; }
-.slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 1100ms var(--ease-out); }
-.slide.is-on img { transform: none; }
+.slide img { width: 100%; height: 100%; object-fit: cover; }
 .ref__list { display: flex; flex-direction: column; justify-content: center; }
 .ref__list button { text-align: left; background: none; border: 0; border-top: 1px solid rgb(11 27 43 / 0.22); padding: 1.25rem 0; cursor: pointer; position: relative; color: var(--ink-3); }
 .ref__list button:last-child { border-bottom: 1px solid rgb(11 27 43 / 0.22); }
@@ -445,18 +445,10 @@ p, li, dd { text-wrap: pretty; }
 .legal h2 { font-size: 1.35rem; margin: 2rem 0 0.5rem; }
 .legal p { color: var(--ink-2); margin-bottom: 0.75rem; }
 
-/* ---------- Einblenden beim Scrollen und weiche Seitenwechsel ---------- */
-@supports (animation-timeline: view()) {
-  .sec__h, .lei__list li, .steps li, .qual__grid > div, .faq details, .tabs, .kontakt__copy, .form, .ref__grid {
-    animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 32%;
-  }
-  @keyframes reveal { from { opacity: 0; transform: translateY(22px); } }
-}
-
+/* ---------- Reduzierte Bewegung ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  .sec__h, .lei__list li, .steps li, .qual__grid > div, .faq details, .tabs, .kontakt__copy, .form, .ref__grid { animation: none; }
   .steps::after { animation: none; transform: none; }
   @view-transition { navigation: none; }
 }
