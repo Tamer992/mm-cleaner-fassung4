@@ -460,3 +460,11 @@ p, li, dd { text-wrap: pretty; }
   .steps::after { animation: none; transform: none; }
   @view-transition { navigation: none; }
 }
+
+/* sehr schmale Geräte (320 px): Kopfzeile verdichten, kein Überlauf */
+@media (max-width: 360px) {
+  .nav__in { gap: 0.5rem; }
+  .brand { gap: 0.55rem; font-size: 1.05rem; }
+  .logo { width: 44px; height: 44px; }
+  .menu-btn { padding: 0 0.75rem; gap: 0.5rem; }
+}

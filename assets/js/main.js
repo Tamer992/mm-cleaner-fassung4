@@ -175,7 +175,7 @@ if (ref) {
         const d = new Date(monat.getFullYear(), monat.getMonth(), t);
         const b = Object.assign(document.createElement("button"), { type: "button", className: "cal__d", textContent: t });
         b.setAttribute("aria-label", fmtTag.format(d));
-        b.setAttribute("aria-pressed", gleich(gewaehlt, d));
+        b.setAttribute("aria-pressed", String(Boolean(gleich(gewaehlt, d))));
         b.disabled = !istBegehungstag(d, heute);
         if (gleich(heute, d)) b.dataset.heute = "";
         b.dataset.t = t;
@@ -220,4 +220,10 @@ if (ref) {
     }), { rootMargin: "-45% 0px -45% 0px" });
     items.forEach((x) => io.observe(x));
   }
+}
+
+/* Menü am Handy: nach dem Antippen eines Punkts schließen, dann springt der Anker */
+{
+  const menu = $("#menu");
+  menu?.addEventListener("click", (e) => { if (e.target.closest("a")) menu.hidePopover(); });
 }
