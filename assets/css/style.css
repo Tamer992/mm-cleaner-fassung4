@@ -199,11 +199,27 @@ p, li, dd { text-wrap: pretty; }
 .hero h1, .hero .lead, .hero__cta { animation: rise 800ms var(--ease-out) both; }
 .hero .lead { animation-delay: 80ms; }
 .hero__cta { animation-delay: 160ms; }
-/* Einmaliger Wisch beim Laden: unscharfe Fläche läuft von links nach rechts über den Startbereich, dahinter ist alles klar. */
-@media (hover: hover) and (pointer: fine) and (min-width: 961px) and (prefers-reduced-motion: no-preference) {
-  .hero::after { content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; background: rgb(10 42 69 / 0.28); border-left: 4px solid var(--yellow); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); animation: wisch 1400ms 250ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+/* Putz-Szene in der Bildecke: Scheibe ist verschmutzt, eine Figur zieht den Abzieher über die Scheibe, danach glänzt sie. Einmalig; bei reduzierter Bewegung steht die saubere Scheibe. */
+.hero__putz { position: absolute; right: 1.1rem; bottom: 1.1rem; width: clamp(170px, 19vw, 270px); height: auto; pointer-events: none; overflow: visible; filter: drop-shadow(0 6px 14px rgb(0 0 0 / 0.35)); }
+.putz__scheibe { fill: #0e3556; stroke: rgb(255 255 255 / 0.55); stroke-width: 2; }
+.putz__dreck { fill: #6a5638; }
+.putz__sauber { fill: #0e3556; transform-box: fill-box; transform-origin: left center; transform: scaleX(1); }
+.putz__glanz { fill: none; stroke: rgb(255 255 255 / 0.5); stroke-width: 3; stroke-linecap: round; }
+.putz__figur { opacity: 0; }
+.putz__haut { fill: #f1c9a5; } .putz__kappe { fill: var(--yellow); } .putz__shirt { fill: var(--blue); } .putz__hose { fill: var(--navy-2); stroke: rgb(255 255 255 / 0.4); stroke-width: 1; }
+.putz__arm { stroke: #f1c9a5; stroke-width: 6; stroke-linecap: round; fill: none; }
+.putz__stiel { fill: #d5dde6; } .putz__blatt { fill: var(--yellow); }
+.putz__funke { fill: var(--yellow); opacity: 0; transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .putz__sauber { animation: putz-sauber 2800ms 900ms linear both; }
+  .putz__figur { animation: putz-figur 2800ms 900ms linear both; }
+  .putz__lauf { animation: putz-lauf 360ms 900ms ease-in-out 8 alternate both; }
+  .putz__funke { animation: putz-funke 900ms 3500ms var(--ease-out) both; }
 }
-@keyframes wisch { to { transform: translateX(101%); } }
+@keyframes putz-sauber { 0% { transform: scaleX(0); } 85%, 100% { transform: scaleX(1); } }
+@keyframes putz-figur { 0% { transform: translateX(0); opacity: 1; } 85% { transform: translateX(170px); opacity: 1; } 100% { transform: translateX(200px); opacity: 0; } }
+@keyframes putz-lauf { to { transform: translateY(-2.5px); } }
+@keyframes putz-funke { 0% { opacity: 0; transform: scale(0) rotate(-40deg); } 40% { opacity: 1; transform: scale(1.2) rotate(0); } 100% { opacity: 1; transform: scale(1); } }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
 .hero__img { position: relative; margin: 0; min-height: 0; background: var(--navy-2); animation: einblenden 1000ms 100ms var(--ease-out) both; }
 @keyframes einblenden { from { opacity: 0; } }
