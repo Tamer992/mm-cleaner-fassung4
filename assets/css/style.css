@@ -220,6 +220,19 @@ p, li, dd { text-wrap: pretty; }
 @keyframes putz-figur { 0% { transform: translateX(0); opacity: 1; } 85% { transform: translateX(170px); opacity: 1; } 100% { transform: translateX(200px); opacity: 0; } }
 @keyframes putz-lauf { to { transform: translateY(-2.5px); } }
 @keyframes putz-funke { 0% { opacity: 0; transform: scale(0) rotate(-40deg); } 40% { opacity: 1; transform: scale(1.2) rotate(0); } 100% { opacity: 1; transform: scale(1); } }
+/* 3D-Startbereich (hero3d.js setzt .has-3d): Bereich bleibt kleben, Scrollen fährt die Kamera durch die Halle. */
+.hero__3d { display: none; }
+.has-3d .hero-pin { height: 320svh; }
+.has-3d .hero { position: sticky; top: var(--nav-h); }
+.has-3d .hero__3d { display: block; position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity 600ms ease; }
+.has-3d .hero__3d.is-live { opacity: 1; }
+.has-3d .hero__3d canvas { display: block; width: 100%; height: 100%; }
+.has-3d .hero__3d::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(10 42 69 / 0.94) 0%, rgb(10 42 69 / 0.78) 34%, rgb(10 42 69 / 0.1) 62%, transparent 100%); pointer-events: none; }
+.has-3d .hero::before { z-index: 1; }
+.has-3d .hero__copy { z-index: 2; will-change: opacity, transform; }
+.has-3d .hero__img { z-index: 2; background: transparent; pointer-events: none; }
+.has-3d .hero__img > img, .has-3d .hero__img::after { display: none; }
+.has-3d .hero__putz { will-change: opacity; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
 .hero__img { position: relative; margin: 0; min-height: 0; background: var(--navy-2); animation: einblenden 1000ms 100ms var(--ease-out) both; }
 @keyframes einblenden { from { opacity: 0; } }
