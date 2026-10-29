@@ -168,7 +168,7 @@ p, li, dd { text-wrap: pretty; }
 .menu:popover-open a:not(.btn):nth-child(4) { transition-delay: 120ms; } .menu:popover-open a:not(.btn):nth-child(5) { transition-delay: 160ms; }
 @starting-style { .menu:popover-open a:not(.btn) { opacity: 0; transform: translateY(10px); } }
 .menu .btn { margin-top: 1.75rem; align-self: flex-start; }
-.menu .menu__tel { margin-top: 1.5rem; font-size: 1.7rem; white-space: nowrap; border: 0; padding: 0; color: var(--yellow); }
+.menu .menu__tel { margin-top: 1.5rem; font-size: 1.35rem; white-space: nowrap; border: 0; padding: 0; color: var(--yellow); }
 .menu .menu__mail { font-size: 1.05rem; font-family: var(--f-body); font-weight: 500; border: 0; padding: 0.4rem 0; color: var(--on-navy-2); }
 
 @media (max-width: 1180px) { .nav__tel { display: none; } }
@@ -349,7 +349,7 @@ p, li, dd { text-wrap: pretty; }
 .kontakt__direct { margin-top: 2rem; display: grid; gap: 1.5rem; justify-items: start; }
 .kontakt__copy .tel { margin: 0; display: grid; gap: 0.3rem; color: var(--ink); }
 .tel__label { font-size: 0.95rem; color: var(--ink-2); font-weight: 500; }
-.tel__nr { font-family: var(--f-display); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-size: clamp(2.1rem, 3.6vw, 3.4rem); white-space: nowrap; text-decoration: none; font-variant-numeric: tabular-nums; }
+.tel__nr { font-family: var(--f-display); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-size: clamp(1.5rem, 3.6vw, 3.4rem); white-space: nowrap; text-decoration: none; font-variant-numeric: tabular-nums; }
 .kontakt__copy .mail { margin: 0; color: var(--ink); font-size: 1.1rem; }
 .kontakt__direct a { text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .kontakt__direct a:hover { text-decoration: underline; } }
