@@ -177,7 +177,7 @@ p, li, dd { text-wrap: pretty; }
   .nav__links { display: none; }
   .menu-btn { display: inline-flex; }
 }
-@media (max-width: 420px) { .nav__act .btn { display: none; } }
+@media (max-width: 560px) { .nav__act .btn { display: none; } }
 
 /* ---------- Startbereich: Marineblau mit Strahlen aus dem Logo, Foto bis zum Rand ---------- */
 .hero {
