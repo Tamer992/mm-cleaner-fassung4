@@ -230,5 +230,5 @@ if (ref) {
 
 // 3D-Startbereich nur am Desktop mit Maus und ohne reduzierte Bewegung; sonst bleibt das Foto
 if (matchMedia("(hover: hover) and (pointer: fine) and (min-width: 961px) and (prefers-reduced-motion: no-preference)").matches) {
-  import("./hero3d.js?v=1").catch(() => {});
+  import("./hero3d.js?v=2").catch(() => {});
 }
